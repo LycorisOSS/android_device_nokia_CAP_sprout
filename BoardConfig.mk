@@ -8,6 +8,13 @@ DEVICE_PATH := device/nokia/CAP_sprout
 # Assert
 TARGET_OTA_ASSERT_DEVICE := CAP,CAP_sprout
 
+# Generate a zip when building TWRP.
+USE_RECOVERY_INSTALLER := true
+RECOVERY_INSTALLER_PATH := device/nokia/NB1/installer
+
+# For building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -125,24 +132,3 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 # Logs
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
-
-# For local builds only
-# TWRP zip installer
-ifneq ($(wildcard bootable/recovery/installer/.),)
-    USE_RECOVERY_INSTALLER := true
-    RECOVERY_INSTALLER_PATH := bootable/recovery/installer
-endif
-
-# Custom TWRP Versioning
-ifneq ($(wildcard device/common/version-info/.),)
-    # Uncomment the below line to use custom device version
-    include device/common/version-info/custom_twrp_version.mk
-
-    # version prefix is optional - the default value is "LOCAL" if nothing is set in device tree
-    CUSTOM_TWRP_VERSION_PREFIX := CPTB
-
-    ifeq ($(CUSTOM_TWRP_VERSION),)
-        CUSTOM_TWRP_VERSION := $(shell date +%Y%m%d)-01
-    endif
-endif
-# end local build flags
