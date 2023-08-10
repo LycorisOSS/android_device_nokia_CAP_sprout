@@ -18,10 +18,6 @@ PRODUCT_MANUFACTURER := Nokia
 
 PRODUCT_GMS_CLIENTID_BASE := android-hmd
 
-# HACK: Set vendor patch level
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.security_patch=2099-12-31
-
 # Build fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="trinket-user 11 RKQ1.211130.001 1 release-keys"
